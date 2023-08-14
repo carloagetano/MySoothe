@@ -56,6 +56,10 @@ import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Spa
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -79,9 +83,13 @@ class MainActivity : ComponentActivity() {
 fun SearchBar(
     modifier: Modifier = Modifier
 ) {
+    var search by rememberSaveable {
+        mutableStateOf("")
+    }
+
     TextField(
-        value = "",
-        onValueChange = {},
+        value = search,
+        onValueChange = { search = it },
         modifier = modifier
             .heightIn(56.dp)
             .fillMaxWidth(),
